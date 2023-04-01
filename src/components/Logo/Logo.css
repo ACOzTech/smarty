@@ -1,0 +1,12 @@
+.Tilt {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--smarty-purple),
+    var(--smarty-pink) 20%
+  );
+  transform-style: preserve-3d;
+}
+
+.smarty-translateZ60 {
+  transform: translateZ(60px);
+}

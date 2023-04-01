@@ -1,13 +1,27 @@
+:root {
+  --smarty-steel-blue: rgb(63, 135, 166);
+  --smarty-dark-blue: darkblue;
+  --smarty-orange: rgb(229, 114, 42);
+  --smarty-pink: rgb(236, 84, 153);
+  --smarty-bright-pink: rgb(233, 50, 209);
+  --smarty-green: rgb(50, 154, 100);
+  --smarty-washed-blue: rgb(221, 238, 255);
+  --smarty-purple: rgb(131, 101, 246);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  padding: 0;
+  font-family: 'Gabriola', 'Courier New', 'Roboto', 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to right, var(--smarty-purple), var(--smarty-pink));
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+  cursor: pointer;
 }
