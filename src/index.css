@@ -3,8 +3,6 @@
   --smarty-dark-blue: darkblue;
   --smarty-orange: rgb(229, 114, 42);
   --smarty-pink: rgb(236, 84, 153);
-  --smarty-bright-pink: rgb(233, 50, 209);
-  --smarty-green: rgb(50, 154, 100);
   --smarty-washed-blue: rgb(221, 238, 255);
   --smarty-purple: rgb(131, 101, 246);
 }
@@ -24,4 +22,26 @@ code {
 
 button {
   cursor: pointer;
+}
+
+.smarty-w-90vw {
+  width: 90vw;
+  max-width: 600px;
+}
+
+.smarty-w-80vw {
+  width: 80vw;
+  max-width: 500px;
+}
+
+@media screen and (min-width: 1200px) {  
+  .smarty-w-60vw-l {
+    width: 60vw;
+    max-width: 600px;
+  }
+
+  .smarty-w-50vw-l {
+    width: 50vw;
+    max-width: 500px;
+  }
 }

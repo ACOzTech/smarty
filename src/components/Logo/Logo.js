@@ -10,7 +10,7 @@ const Logo = () => {
         glareMaxOpacity={0.3}
         scale={1.03}
         gyroscope={true}
-        className='Tilt flex flex-column items-center justify-center h3 w3 h4-ns w4-ns f5 f3-ns br2 shadow-5'
+        className='Tilt flex flex-column items-center justify-center h3 w3 f4 br2 shadow-5'
       >
         <div className='i white smarty-translateZ60'>
           <div>Smarty</div>
