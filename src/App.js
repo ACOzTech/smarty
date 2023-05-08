@@ -8,23 +8,25 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 
+const initialState = {
+  input: '',
+  imageURL: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  },
+};
+
 class App extends Component {  
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageURL: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      },
-    }
+    this.state = initialState;
     // Load Particles here so that it doesn't keep being called everytime on render
     this.loadParticles(); 
   }
@@ -54,41 +56,6 @@ class App extends Component {
     } catch {}
   };
 
-  getClarifaiRequestOptions = (imageURL) => {
-    // Your PAT (Personal Access Token) can be found in the Clarifai portal
-    const PAT = '730aa9e7383a4392be746176c2e4a129';
-    const USER_ID = 'clarifai';       
-    const APP_ID = 'main';      
-    const IMAGE_URL = imageURL;
-    
-    const raw = JSON.stringify({
-      "user_app_id": {
-        "user_id": USER_ID,
-        "app_id": APP_ID
-      },
-      "inputs": [
-        {
-          "data": {
-            "image": {
-              "url": IMAGE_URL
-            }
-          }
-        }
-      ]
-    });
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Key ' + PAT
-      },
-      body: raw
-    };
-
-    return requestOptions;
-  }
-
   calcFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
@@ -113,10 +80,13 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input});
-    const CLARIFAI_URL = 'https://api.clarifai.com/v2/models/';
-    const MODEL_ID = 'face-detection';
-
-    fetch(CLARIFAI_URL + MODEL_ID + '/outputs', this.getClarifaiRequestOptions(this.state.input))
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
       .then(response => response.json())
       .then(result => {
         if (result) {
@@ -130,7 +100,6 @@ class App extends Component {
           })
             .then(response => response.json())
             .then(count => {
-              console.log('count:', count);
               this.setState(Object.assign(this.state.user, {entries: count}));
             })
         }
@@ -141,7 +110,7 @@ class App extends Component {
   onRouteChange = (route) => {
     this.setState({route: route});
     if (route === 'signout') {
-      this.setState({isSignedIn: false});
+      this.setState(initialState);
     } else if (route === 'home') {
       this.setState({isSignedIn: true});
     }
